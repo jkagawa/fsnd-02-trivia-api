@@ -12,6 +12,10 @@
   width: 60%;
 }
 
+.categories-list li {
+  cursor: pointer;
+}
+
 .questions-list {
   flex-basis: 75%;
   text-align: center;
@@ -53,6 +57,10 @@
   margin-left: 0px !important;
 }
 
+.button {
+  cursor: pointer;
+}
+
 span.page-num {
   margin: 5px;
   padding-bottom: 50px;
@@ -60,6 +68,7 @@ span.page-num {
   font-weight: bolder;
   text-decoration: underline;
   font-size: 16px;
+  cursor: pointer;
 }
 
 span.page-num.active {
