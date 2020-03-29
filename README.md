@@ -42,3 +42,29 @@ The `./frontend` directory contains a complete React frontend to consume the dat
 Pay special attention to what data the frontend is expecting from each API response to help guide how you format your API. 
 
 [View the README.md within ./frontend for more details.](./frontend/README.md)
+
+=========================
+
+# Project README
+
+## Getting Started
+
+1. Initialize and activate a virtualenv: 
+$ cd YOUR_PROJECT_DIRECTORY_PATH/
+$ virtualenv --no-site-packages env OR virtualenv env
+$ source env/bin/activate (MacOS/Linux) OR source env/Scripts/activate (Windows)
+(instructions can be found here https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
+2. Install the dependencies:
+In the terminal, go to the backend folder and run the following:
+$ pip install -r requirements.txt OR pip3 install -r requirements.txt
+
+3. Set up database:
+Restore a database using the trivia.psql file provided. In the terminal, connect to psql and create a database called trivia. while in the backend folder, run the following:
+psql trivia < trivia.psql OR psql -d trivia -U postgres -f trivia.psql
+
+4. Run the server
+In the terminal, go to the backend folder and run the following:
+export FLASK_APP=flaskr
+export FLASK_ENV=development
+flask run
