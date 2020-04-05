@@ -164,7 +164,8 @@ def create_app(test_config=None):
                 question.insert()
                 
                 return jsonify({
-                    'success': True
+                    'success': True,
+                    'id': question.id
                 })
             # Else means request is for searching questions
             else:
@@ -248,12 +249,15 @@ def create_app(test_config=None):
     '''
     @app.route('/quizzes', methods=['POST'])
     def get_quiz_questions():
-        body = request.get_json()
-        previous_questions = body.get('previous_questions', None)
-        quiz_category_id = int(body.get('quiz_category', None).get('id', None)) + 1
-        
         try:
+            body = request.get_json()
+            previous_questions = body.get('previous_questions', [])
+            quiz_category_id = body.get('quiz_category', None)
             if quiz_category_id:
+                quiz_category_id = quiz_category_id.get('id', None)
+            
+            if quiz_category_id:
+                quiz_category_id = int(quiz_category_id) + 1
                 current_question = Question.query.order_by(func.random()).filter(Question.category == quiz_category_id)
                 for a in previous_questions:
                     current_question = current_question.filter(Question.id != a)
@@ -287,6 +291,29 @@ def create_app(test_config=None):
     Create error handlers for all expected errors 
     including 404 and 422. 
     '''
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({
+            "success": False, 
+            "error": 400,
+            "message": "bad request"
+        }), 400
+    
+    @app.errorhandler(404)
+    def not_found(error):
+        return jsonify({
+            "success": False, 
+            "error": 404,
+            "message": "resource not found"
+        }), 404
+                              
+    @app.errorhandler(422)
+    def unprocessable(error):
+        return jsonify({
+            "success": False, 
+            "error": 422,
+            "message": "unprocessable"
+        }), 422
   
     return app
 
