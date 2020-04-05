@@ -39,7 +39,13 @@ flask run
 ```
 
 #### 5. Run the app
-Navigate to the frontend folder directory and run the following:
+Navigate to the frontend folder directory and run the following to install dependencies:
+
+```bash
+npm install
+```
+
+And then run the following to open the app:
 
 ```bash
 npm start
